@@ -41,7 +41,7 @@ const MissingPersons = () => {
                 }}>Önceki</Button>
 
 
-                {missingPersons && (
+                {(missingPersons && missingPersons[currentMissingPerson]) && (
                     <>
                         <Flex direction="column" >
                             <Heading size="lg">Kayıp Kişi</Heading>
