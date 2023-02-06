@@ -22,8 +22,7 @@ import axios from "axios";
 import Config from "../../Config";
 
 const Header = (props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const handleToggle = () => (isOpen ? onClose() : onOpen());
+
   const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useDisclosure();
   const [name, setName] = React.useState("");
   const [address, setAddress] = React.useState("");
@@ -104,14 +103,11 @@ const Header = (props) => {
           </Heading>
         </Flex>
 
-        <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
-          <HamburgerIcon />
-        </Box>
 
 
 
         <Box
-          display={{ base: isOpen ? "block" : "none", md: "block" }}
+          display="block"
           mt={{ base: 4, md: 0 }}
         >
           <Button

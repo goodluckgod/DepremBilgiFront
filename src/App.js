@@ -36,6 +36,7 @@ function App() {
       <Flex direction="column" bg={"black"} minH="100vh">
         <Header />
         <Flex px={[4, 8, 12]} mt={4} flexDirection={"column"} gap={2}>
+          
           {alerts.length > 0 && alerts.map((alert) => (
             <Alert status='error' bgGradient='linear(to-r, teal.500, green.500)' borderWidth={1} borderColor={"teal.200"} borderRadius={4}>
               <AlertIcon />
