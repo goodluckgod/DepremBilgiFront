@@ -21,7 +21,7 @@ const Earthquekes = () => {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        axios.get(Config.apiURL + "/earthquekes")
+        axios.get(Config.apiURL + "/earthquakes")
             .then((response) => {
                 setEarthquekes(response.data.filter((earthqueke) => earthqueke.mag > 4 && new Date(earthqueke.date) > new Date(new Date().getTime() - 24 * 60 * 60 * 1000)));
                 setLoading(false);
