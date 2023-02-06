@@ -13,7 +13,7 @@ import {
     Spinner,
     Text,
 } from "@chakra-ui/react";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
+import Config from "../../Config";
 
 const Earthquekes = () => {
     const [earthquekes, setEarthquekes] = useState([]);
@@ -21,9 +21,9 @@ const Earthquekes = () => {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        axios.get("https://api.berkealp.net/kandilli/index.php?all")
+        axios.get(Config.apiURL + "/earthquekes")
             .then((response) => {
-                setEarthquekes(response.data.filter((earthqueke) => earthqueke.Magnitude > 4 && new Date(earthqueke.Time) > new Date(new Date().getTime() - 24 * 60 * 60 * 1000)));
+                setEarthquekes(response.data.filter((earthqueke) => earthqueke.mag > 4 && new Date(earthqueke.date) > new Date(new Date().getTime() - 24 * 60 * 60 * 1000)));
                 setLoading(false);
             })
             .catch((error) => {
@@ -48,7 +48,6 @@ const Earthquekes = () => {
                         <Th color={"black"} isNumeric>Büyüklük</Th>
                         <Th color={"black"} isNumeric>Derinlik</Th>
                         <Th color={"black"} isNumeric>Zaman</Th>
-                        <Th color={"black"}>Lokasyon Resmi</Th>
                     </Tr>
                 </Thead>
 
@@ -56,14 +55,10 @@ const Earthquekes = () => {
 
                     {earthquekes.map((earthqueke) => (
                         <Tr key={earthqueke.ID}>
-                            <Th color={"black"}>{earthqueke.Region}</Th>
-                            <Th color={"black"} isNumeric>{earthqueke.Magnitude}</Th>
-                            <Th color={"black"} isNumeric>{earthqueke.Depth}</Th>
-                            <Th color={"black"} isNumeric>{new Date(earthqueke.Time).toLocaleString()}</Th>
-                            <Th color={"black"} cursor={"pointer"} onClick={() => {
-                                window.open(earthqueke.MapImage, "_blank");
-                            }
-                            }><ExternalLinkIcon boxSize={25} /></Th>
+                            <Th color={"black"}>{earthqueke.lokasyon}</Th>
+                            <Th color={"black"} isNumeric>{earthqueke.mag}</Th>
+                            <Th color={"black"} isNumeric>{earthqueke.depth}</Th>
+                            <Th color={"black"} isNumeric>{new Date(earthqueke.date).toLocaleString()}</Th>
                         </Tr>
                     ))}
                 </Tbody>
