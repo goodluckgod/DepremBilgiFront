@@ -1,3 +1,3 @@
 export default {
-    apiURL: 'http://localhost:3005',
+    apiURL: 'https://successful-hare-bathing-suit.cyclic.app',
 }
